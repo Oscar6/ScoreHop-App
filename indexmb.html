@@ -17,9 +17,10 @@
 
         #map { 
             position:absolute; 
-            top:0; 
+            top:65px; 
             bottom:0; 
             width:100%; 
+
         }
 
         .beerIcon {
@@ -35,11 +36,20 @@
         .geocoder {
             position:absolute;
             /* z-index: 1; */
-            width:75%;
+            width:80%;
             left:50%;
             margin-left: -10%;
             top: 620px;
             
+        }
+
+        #logo {
+            position:absolute; 
+            left:50%;
+            margin-left: -10%;
+            top:-20px;
+            width: 15%;
+            height: 13%;
         }
 
         .mapboxgl-ctrl-geocoder { 
@@ -53,9 +63,10 @@
 
 <body>
 
-
+<!-- <h1 align="center" style="color: orange;">ScoreHop</h1> -->
 <div id='map'></div>
 <img src="icons/beermug.svg">
+<img id="logo" src="icons/logofinal.png">
 <div id='geocoder' class='geocoder'></div>
 
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
