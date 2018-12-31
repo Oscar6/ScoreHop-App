@@ -64,7 +64,6 @@ L.Control.Watermark = L.Control.extend({
     },
 
     onRemove: function(map) {
-        // Nothing to do here
     }
 });
 
@@ -133,6 +132,7 @@ $(function () {
                             console.log(arr['lon'])
                             console.log(arr['venue'])
                         }
+                        // Pans to added marker
                         map1.panTo(new L.LatLng(arr['lat'], arr['lon'], arr['venue'], 8));
                     })
                 })
