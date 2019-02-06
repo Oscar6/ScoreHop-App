@@ -135,7 +135,7 @@ function openBreweryApi(city){
 
                                 set["state"] = value.state
 
-                                set["postal"] = value.postal_code
+                                set["postal"] = value.postal
 
                                 
                                 coord.push(set)
@@ -220,9 +220,8 @@ function anchorClick(){
                 venueMarker(arr['lat'], arr['lon'], arr['venue'], arr['title'])
                 $('li').remove()
 
-                map1.panTo(new L.LatLng(arr['lat'], arr['lon'], 8));
                 openBreweryApi(arr['city'])
-                
+                map1.panTo(new L.LatLng(arr['lat'], arr['lon'], arr['venue'], 8));
             }
 
             
