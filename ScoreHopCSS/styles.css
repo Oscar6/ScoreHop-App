@@ -15,14 +15,23 @@ input{
     height: 100vh;
     /* top: 85px; */
 }
-.logoimage {
+/* .logoimage {
     position: absolute;
     z-index: 900;
     top: 1%;
     display: flex;
     justify-content: center;
-}
+} */
 
+#logoContainer {
+    position: absolute;
+    z-index: 900;
+    top: 1%;
+    left: 30%;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
 
 
 /* img{
