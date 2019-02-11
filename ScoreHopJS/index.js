@@ -135,7 +135,7 @@ function openBreweryApi(city){
 
                                 set["state"] = value.state
 
-                                set["postal"] = value.postal
+                                set["postal"] = value.postal_code
 
                                 
                                 coord.push(set)
