@@ -2,7 +2,7 @@
     position: absolute; 
     z-index: 950;
     top:70%;
-    width:100%;
+    width:100vw;
 }
 
 input{
@@ -28,7 +28,7 @@ input{
     z-index: 900;
     top: 1%;
     left: 30%;
-    width: 40%;
+    width: 40vw;
     display: flex;
     justify-content: center;
 }
