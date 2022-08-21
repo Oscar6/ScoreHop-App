@@ -55,16 +55,6 @@ map1.on('locationfound', onLocationFound);
 
 
 
-
-
-
-
-
-
-
-
-
-
 // Blue marker. Iniate on search function.
 function venueMarker(lat, long, name, title) {
     var latlngVenue = L.latLng(lat, long)
@@ -78,10 +68,7 @@ function venueMarker(lat, long, name, title) {
 // end venueMarker()
 
 
-
-
-
-
+// Displays Brewery info
 var onClickLatLngBrewery = []
 console.log(onClickLatLngBrewery)
 //add Brewery markers
@@ -98,72 +85,45 @@ function addBreweryMarkers(lat, long, name, street, city, state, postal) {
 
 
 
-
-
-
-
-
-function openBreweryApi(city){
-                ///john brewery api code
+function openBreweryApi(city) {
+    ///john brewery api code
                 
-                var openBreweryDB = `https://api.openbrewerydb.org/breweries?page=1&per_page=50&by_city=${city}`;
-                
-                
-                $.get(openBreweryDB)
-                    .done((result) => {
-                        console.log(result)
-                        $.each(result, function (index, value) {
+    var openBreweryDB = `https://api.openbrewerydb.org/breweries?page=1&per_page=50&by_city=${city}`;
 
-                            if (value.longitude == null) {
+    $.get(openBreweryDB)
+        .done((result) => {
+            console.log(result)
+            $.each(result, function (index, value) {
 
-                                return;
-                            } 
-                            
-                            else {
+                if (value.longitude == null) {
+                    return;
+                } else {
+                    var set = {}
 
-                                var set = {}
+                    set["lat"] = parseFloat(value.latitude)
+                    set["lng"] = parseFloat(value.longitude)
+                    set["brewery"] = value.name
+                    set["street"] = value.street
+                    set["city"] = value.city
+                    set["state"] = value.state
+                    set["postal"] = value.postal_code
+                    coord.push(set)
+                };
+            });
+            // console.log(coord)
+            // console.log(coordsarr)
+            // console.log(coordsarr[0])
+            // console.log(coord[0])
+            // console.log(coord[0].lat)
+            // console.log(coord[0].lng)
+            // console.log(coord[1].lat)
+            // console.log(coord[1].lng)
 
-                                set["lat"] = parseFloat(value.latitude)
-
-                                set["lng"] = parseFloat(value.longitude)
-
-                                set["brewery"] = value.name
-
-                                set["street"] = value.street
-
-                                set["city"] = value.city
-
-                                set["state"] = value.state
-
-                                set["postal"] = value.postal_code
-
-                                
-                                coord.push(set)
-
-                            };
-                            
-                        });
-                        // console.log(coord)
-                        // console.log(coordsarr)
-                        // console.log(coordsarr[0])
-                        // console.log(coord[0])
-                        // console.log(coord[0].lat)
-                        // console.log(coord[0].lng)
-                        // console.log(coord[1].lat)
-                        // console.log(coord[1].lng)
-                       
-                        
-                        coord.map(function (arr, index) {
-                            
-                            addBreweryMarkers(arr['lat'], arr['lng'], arr['brewery'], arr['street'], arr['city'], arr['state'], arr['postal'])
-
-                    })
-                    
-                    });
-                    
-                    
-                    
-                }
+            coord.map(function (arr, index) {
+                addBreweryMarkers(arr['lat'], arr['lng'], arr['brewery'], arr['street'], arr['city'], arr['state'], arr['postal'])
+            })
+        });
+    }
 
 
 
@@ -184,9 +144,10 @@ function openBreweryApi(city){
                     date = new Date(value.datetime_local)
                     
                     $unorder.append(`<li><div class='card bg-info text-white'> 
-                        <div class='card-body'> <a style='color:white' id=${value.venue.id} href='#'> 
+                        <div class='card-body'> <a style='color:white' id=${value.venue.id} href='#'>
+                        <p> ${value.venue.name}</p>
                         <p> ${value.title}</p>
-                        <p> ${new Date(value.datetime_utc)}</p>
+                        <p> ${new Date(value.datetime_utc).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})}</p>
                         <p> ${value.venue.address}  ${value.venue.extended_address}</p>
                         </a></div></div><br></li>`) 
                         // end of append
@@ -211,10 +172,8 @@ function anchorClick(){
     $("a").click(function (event) {
         event.preventDefault()
 
-    
         var idval = $(this).attr('id');
 
-        
         coordsarr.map(function (arr, index) {
             if (arr['id'] == idval) {
                 venueMarker(arr['lat'], arr['lon'], arr['venue'], arr['title'])
@@ -223,8 +182,6 @@ function anchorClick(){
                 openBreweryApi(arr['city'])
                 map1.panTo(new L.LatLng(arr['lat'], arr['lon'], arr['venue'], 8));
             }
-
-            
         })
         // console.log(coordsarr)
         // console.log(coord)
